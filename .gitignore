@@ -46,3 +46,7 @@ public/workbox*
 
 # secrets
 .secrets/
+
+# moon
+.moon/cache
+.moon/docker

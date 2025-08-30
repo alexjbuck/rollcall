@@ -1,0 +1,20 @@
+tasks:
+  dev:
+    command: 'next dev --turbopack'
+    inputs:
+      - 'src/**/*'
+      - 'next.config.ts'
+      - 'public/**/*'
+      - 'package.json'
+      - 'tsconfig.json'
+      - 'postcss.config.mjs'
+    outputs:
+      - '.next' 
+  build:
+    command: 'yarn build'
+  start:
+    command: 'yarn start'
+  lint:
+    command: 'yarn lint'
+  format:
+    command: 'yarn format'

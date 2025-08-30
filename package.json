@@ -1,12 +1,11 @@
 {
   "name": "rollcall",
-  "packageManager": "yarn@4.9.4",
-  "private": true,
   "workspaces": [
     "apps/*",
     "packages/*"
   ],
-  "devDependencies": {
-    "@moonrepo/cli": "^1.39.4"
+  "private": true,
+  "engines": {
+    "node": "~22"
   }
 }
