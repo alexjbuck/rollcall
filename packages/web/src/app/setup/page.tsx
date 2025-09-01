@@ -37,8 +37,9 @@ export default function SetupPage() {
       if (profileErr) throw profileErr;
 
       router.push("/dashboard");
-    } catch (e: any) {
-      setError(e?.message ?? "Failed to create organization");
+    } catch (e: unknown) {
+      const message = e instanceof Error ? e.message : String(e);
+      setError(message || "Failed to create organization");
     } finally {
       setLoading(false);
     }
@@ -57,6 +58,7 @@ export default function SetupPage() {
         onClick={onCreate}
         disabled={!orgName || loading}
         className="rounded bg-black text-white px-4 py-2 disabled:opacity-50"
+        type="button"
       >
         {loading ? "Creating..." : "Create organization"}
       </button>

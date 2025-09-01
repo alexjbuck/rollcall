@@ -2,10 +2,8 @@
 
 import { createSupabaseBrowserClient } from "@/lib/supabase/client";
 import { useCallback, useState } from "react";
-import { useRouter } from "next/navigation";
 
 export default function SignInPage() {
-  const router = useRouter();
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
@@ -20,8 +18,9 @@ export default function SignInPage() {
         options: { redirectTo },
       });
       if (signInError) throw signInError;
-    } catch (e: any) {
-      setError(e?.message ?? "Failed to sign in");
+    } catch (e: unknown) {
+      const message = e instanceof Error ? e.message : String(e);
+      setError(message || "Failed to sign in");
     } finally {
       setLoading(false);
     }
@@ -35,6 +34,7 @@ export default function SignInPage() {
           className="w-full rounded-md bg-black text-white py-2 px-4 disabled:opacity-50"
           disabled={loading}
           onClick={signInWithGoogle}
+          type="button"
         >
           {loading ? "Redirecting..." : "Continue with Google"}
         </button>

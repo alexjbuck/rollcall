@@ -25,7 +25,7 @@ export default function DashboardLayout({
         </nav>
         <div className="ml-auto">
           <form action="/signout" method="post">
-            <button className="text-sm underline">Sign out</button>
+            <button className="text-sm underline" type="submit">Sign out</button>
           </form>
         </div>
       </header>
