@@ -7,19 +7,18 @@ project:
 tags: ["database", "supabase"]
 tasks:
   stop:
-    command: 'yarn dlx supabase stop'
+    command: 'yarn supabase stop'
   dev:
-    command: 'yarn dlx supabase start'
+    command: 'yarn supabase start'
 
   migration-new:
-    command: 'yarn dlx supabase migration new'
+    command: 'yarn supabase migration new'
     options:
-      interactive: true
       cache: false
       runInCI: false
     
   migration-up:
-    command: 'yarn dlx supabase migration up'
+    command: 'yarn supabase migration up'
     inputs:
       - 'supabase/migrations/**/*'
     
