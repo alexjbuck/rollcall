@@ -12,7 +12,7 @@ vcs:
   defaultBranch: 'main'
   syncHooks: true
   hooks:
-    pre-push:
+    pre-commit:
       - 'moon run :lint :format --affected --status=staged'
 
 notifier:
