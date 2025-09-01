@@ -4,12 +4,25 @@ stack: "backend"
 project:
   name: "@rollcall/db"
   description: "Rollcall database"
+
 tags: ["database", "supabase"]
+
 tasks:
   stop:
     command: 'yarn supabase stop'
+    inputs:
+      - 'supabase/config.toml'
+      - '.env.local'
   dev:
     command: 'yarn supabase start'
+    deps:
+      - 'stop'
+    options:
+      envFile:
+        - '.env'
+        - '.env.development'
+        - '.env.local'
+        - '.env.production'
 
   migration-new:
     command: 'yarn supabase migration new'

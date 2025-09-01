@@ -1860,6 +1860,14 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@rollcall/db@workspace:packages/db":
+  version: 0.0.0-use.local
+  resolution: "@rollcall/db@workspace:packages/db"
+  dependencies:
+    supabase: "npm:2.39.2"
+  languageName: unknown
+  linkType: soft
+
 "@rollcall/web@workspace:packages/web":
   version: 0.0.0-use.local
   resolution: "@rollcall/web@workspace:packages/web"
@@ -3242,14 +3250,6 @@ __metadata:
   checksum: 10c0/fa7aa40078025b7810dcffc16df02c480573b7b53ef1205aa6a61533011005c1890e5ba17018c692ce7c900212b547262d33279fde801ad9843edc0863bf78c4
   languageName: node
   linkType: hard
-
-"db@workspace:packages/db":
-  version: 0.0.0-use.local
-  resolution: "db@workspace:packages/db"
-  dependencies:
-    supabase: "npm:2.39.2"
-  languageName: unknown
-  linkType: soft
 
 "debug@npm:4, debug@npm:^4.1.0, debug@npm:^4.3.1, debug@npm:^4.3.4, debug@npm:^4.4.1":
   version: 4.4.1

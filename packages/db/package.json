@@ -1,5 +1,5 @@
 {
-  "name": "db",
+  "name": "@rollcall/db",
   "packageManager": "yarn@4.9.4",
   "devDependencies": {
     "supabase": "2.39.2"
