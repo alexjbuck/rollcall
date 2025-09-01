@@ -1,5 +1,6 @@
 import { redirect } from "next/navigation";
 import { createSupabaseServerClient } from "@/lib/supabase/server";
+import { AvailabilityCalendar } from "@/components/availability/AvailabilityCalendar";
 
 export default async function DashboardPage() {
   const supabase = await createSupabaseServerClient();
@@ -11,11 +12,14 @@ export default async function DashboardPage() {
   }
 
   return (
-    <div className="space-y-2">
-      <h1 className="text-2xl font-semibold">Your Availability</h1>
-      <p className="text-sm text-gray-600">
-        Calendar will go here. Mark any days you can attend.
-      </p>
+    <div className="space-y-4">
+      <div>
+        <h1 className="text-2xl font-semibold">Your Availability</h1>
+        <p className="text-sm text-gray-600">
+          Click days to mark when you can attend.
+        </p>
+      </div>
+      <AvailabilityCalendar />
     </div>
   );
 }
