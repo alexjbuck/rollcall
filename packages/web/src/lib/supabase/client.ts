@@ -1,4 +1,4 @@
-import { createBrowserClient } from '@supabase/auth-helpers-nextjs';
+import { createClientComponentClient } from '@supabase/auth-helpers-nextjs';
 
 export const createSupabaseBrowserClient = () => {
   const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL as string;
@@ -6,6 +6,9 @@ export const createSupabaseBrowserClient = () => {
   if (!supabaseUrl || !supabaseAnonKey) {
     throw new Error('Missing Supabase env vars');
   }
-  return createBrowserClient(supabaseUrl, supabaseAnonKey);
+  return createClientComponentClient({
+    supabaseUrl,
+    supabaseKey: supabaseAnonKey,
+  });
 };
 
