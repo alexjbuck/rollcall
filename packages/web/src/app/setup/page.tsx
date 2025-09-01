@@ -1,8 +1,8 @@
 "use client";
 
-import { createSupabaseBrowserClient } from "@/lib/supabase/client";
-import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
+import { useEffect, useState } from "react";
+import { createSupabaseBrowserClient } from "@/lib/supabase/client";
 
 export default function SetupPage() {
   const router = useRouter();
@@ -66,4 +66,3 @@ export default function SetupPage() {
     </div>
   );
 }
-

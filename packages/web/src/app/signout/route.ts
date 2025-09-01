@@ -1,6 +1,6 @@
-import { NextResponse } from "next/server";
-import { cookies } from "next/headers";
 import { createServerClient } from "@supabase/ssr";
+import { cookies } from "next/headers";
+import { NextResponse } from "next/server";
 
 export async function POST() {
   const cookieStore = await cookies();
@@ -48,4 +48,3 @@ export async function POST() {
   const base = process.env.NEXT_PUBLIC_APP_URL || "http://localhost:3000";
   return NextResponse.redirect(new URL("/signin", base));
 }
-

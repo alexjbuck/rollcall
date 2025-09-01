@@ -1,7 +1,7 @@
 "use client";
 
-import { createSupabaseBrowserClient } from "@/lib/supabase/client";
 import { useCallback, useState } from "react";
+import { createSupabaseBrowserClient } from "@/lib/supabase/client";
 
 export default function SignInPage() {
   const [loading, setLoading] = useState(false);
@@ -43,4 +43,3 @@ export default function SignInPage() {
     </div>
   );
 }
-

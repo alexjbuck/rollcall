@@ -1,5 +1,7 @@
 tasks:
   lint:
     command: "biome check"
+  lint-fix:
+    command: "biome check --write"
   format:
     command: "biome format --write"

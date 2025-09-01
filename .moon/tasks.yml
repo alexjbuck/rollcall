@@ -1,6 +1,0 @@
-tasks:
-  dev:
-    command: "noop"
-    deps:
-      - "web:dev"
-    local: true

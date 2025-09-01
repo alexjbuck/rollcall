@@ -1,11 +1,7 @@
-import { ReactNode } from "react";
 import Link from "next/link";
+import type { ReactNode } from "react";
 
-export default function DashboardLayout({
-  children,
-}: {
-  children: ReactNode;
-}) {
+export default function DashboardLayout({ children }: { children: ReactNode }) {
   return (
     <div className="min-h-screen grid grid-rows-[auto_1fr]">
       <header className="border-b px-4 py-3 flex items-center gap-4">
@@ -25,7 +21,9 @@ export default function DashboardLayout({
         </nav>
         <div className="ml-auto">
           <form action="/signout" method="post">
-            <button className="text-sm underline" type="submit">Sign out</button>
+            <button className="text-sm underline" type="submit">
+              Sign out
+            </button>
           </form>
         </div>
       </header>
@@ -33,4 +31,3 @@ export default function DashboardLayout({
     </div>
   );
 }
-

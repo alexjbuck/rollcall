@@ -1,6 +1,6 @@
-import { NextRequest, NextResponse } from "next/server";
-import { cookies } from "next/headers";
 import { createServerClient } from "@supabase/ssr";
+import { cookies } from "next/headers";
+import { type NextRequest, NextResponse } from "next/server";
 
 export async function GET(req: NextRequest) {
   const cookieStore = await cookies();
@@ -60,4 +60,3 @@ export async function GET(req: NextRequest) {
   }
   return NextResponse.redirect(new URL(next, url.origin));
 }
-
