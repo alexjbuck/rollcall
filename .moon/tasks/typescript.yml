@@ -1,4 +1,6 @@
 tasks:
+  check:
+    command: "tsc --noEmit"
   lint:
     command: "biome check"
   lint-fix:

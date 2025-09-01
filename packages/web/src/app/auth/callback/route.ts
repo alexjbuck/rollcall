@@ -12,38 +12,16 @@ export async function GET(req: NextRequest) {
         get(name: string) {
           return cookieStore.get(name)?.value;
         },
-        set(
-          name: string,
-          value: string,
-          options: {
-            path?: string;
-            domain?: string;
-            maxAge?: number;
-            expires?: Date;
-            httpOnly?: boolean;
-            secure?: boolean;
-            sameSite?: "lax" | "strict" | "none";
-          },
-        ) {
+        set(name: string, value: string, options: any) {
           cookieStore.set({ name, value, ...options });
         },
-        remove(
-          name: string,
-          options: {
-            path?: string;
-            domain?: string;
-            maxAge?: number;
-            expires?: Date;
-            httpOnly?: boolean;
-            secure?: boolean;
-            sameSite?: "lax" | "strict" | "none";
-          },
-        ) {
+        remove(name: string, options: any) {
           cookieStore.set({ name, value: "", ...options, maxAge: 0 });
         },
       },
     },
   );
+
   const url = new URL(req.url);
   const code = url.searchParams.get("code");
   if (code) {

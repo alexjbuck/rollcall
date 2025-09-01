@@ -8,24 +8,16 @@ export const createSupabaseServerClient = async () => {
   if (!supabaseUrl || !supabaseAnonKey) {
     throw new Error("Missing Supabase env vars");
   }
-  type CookieOptions = {
-    path?: string;
-    domain?: string;
-    maxAge?: number;
-    expires?: Date;
-    httpOnly?: boolean;
-    secure?: boolean;
-    sameSite?: "lax" | "strict" | "none";
-  };
+
   return createServerClient(supabaseUrl, supabaseAnonKey, {
     cookies: {
       get(name: string) {
         return cookieStore.get(name)?.value;
       },
-      set(name: string, value: string, options: CookieOptions) {
+      set(name: string, value: string, options: any) {
         cookieStore.set({ name, value, ...options });
       },
-      remove(name: string, options: CookieOptions) {
+      remove(name: string, options: any) {
         cookieStore.set({ name, value: "", ...options, maxAge: 0 });
       },
     },
