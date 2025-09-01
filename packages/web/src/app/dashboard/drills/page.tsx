@@ -43,9 +43,13 @@ export default async function DrillsPage() {
               <div>
                 <div className="font-medium">{d.title}</div>
                 <div className="text-sm text-gray-600">
-                  {new Date(d.start_date as unknown as string).toLocaleDateString()} -
-                  {" "}
-                  {new Date(d.end_date as unknown as string).toLocaleDateString()}
+                  {new Date(
+                    d.start_date as unknown as string,
+                  ).toLocaleDateString()}{" "}
+                  -{" "}
+                  {new Date(
+                    d.end_date as unknown as string,
+                  ).toLocaleDateString()}
                   {d.location ? ` • ${d.location}` : ""}
                 </div>
               </div>

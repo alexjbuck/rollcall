@@ -1,8 +1,8 @@
 "use client";
 
-import { useEffect, useMemo, useState } from "react";
-import { createSupabaseBrowserClient } from "@/lib/supabase/client";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import { useMemo, useState } from "react";
+import { createSupabaseBrowserClient } from "@/lib/supabase/client";
 
 type AvailabilityRow = {
   id: string;
@@ -44,7 +44,9 @@ export function AvailabilityCalendar() {
 
   const availableSet = useMemo(() => {
     const set = new Set<string>();
-    (data ?? []).forEach((r) => set.add(r.available_date));
+    for (const r of data ?? []) {
+      set.add(r.available_date);
+    }
     return set;
   }, [data]);
 
@@ -84,12 +86,16 @@ export function AvailabilityCalendar() {
       const isSelected = availableSet.has(isoDate);
       const next = isSelected
         ? (previous ?? []).filter((r) => r.available_date !== isoDate)
-        : [...(previous ?? []), { id: `temp-${isoDate}`, available_date: isoDate }];
+        : [
+            ...(previous ?? []),
+            { id: `temp-${isoDate}`, available_date: isoDate },
+          ];
       qc.setQueryData(["availability", rangeKey], next);
       return { previous };
     },
     onError: (_err, _vars, ctx) => {
-      if (ctx?.previous) qc.setQueryData(["availability", rangeKey], ctx.previous);
+      if (ctx?.previous)
+        qc.setQueryData(["availability", rangeKey], ctx.previous);
     },
     onSettled: () => {
       qc.invalidateQueries({ queryKey: ["availability", rangeKey] });
@@ -180,4 +186,3 @@ export function AvailabilityCalendar() {
     </div>
   );
 }
-

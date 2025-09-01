@@ -1,12 +1,12 @@
+import path from "node:path";
+import { fileURLToPath } from "node:url";
 import type { NextConfig } from "next";
-import { fileURLToPath } from 'node:url';
-import path from 'node:path';
 
 const nextConfig: NextConfig = {
   /* config options here */
   turbopack: {
-    root: path.dirname(fileURLToPath(import.meta.url))
-  }
+    root: path.dirname(fileURLToPath(import.meta.url)),
+  },
 };
 
 export default nextConfig;
