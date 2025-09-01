@@ -6,7 +6,8 @@
     "dev": "next dev --turbopack",
     "build": "next build --turbopack",
     "start": "next start",
-    "test:e2e": "playwright test"
+    "test:e2e": "playwright test",
+    "test:e2e:install": "playwright install --with-deps"
   },
   "dependencies": {
     "@supabase/auth-helpers-nextjs": "^0.10.0",
@@ -20,8 +21,8 @@
     "react-dom": "19.1.0"
   },
   "devDependencies": {
-    "@playwright/test": "^1.47.2",
     "@biomejs/biome": "2.2.0",
+    "@playwright/test": "^1.47.2",
     "@tailwindcss/postcss": "^4",
     "@types/node": "^24.3.0",
     "@types/react": "^19",
