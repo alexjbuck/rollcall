@@ -1,4 +1,5 @@
 import { defineConfig, devices } from '@playwright/test';
+// Use dotenv only if available; otherwise rely on process.env injected by Yarn
 
 export default defineConfig({
   testDir: './tests',
@@ -26,11 +27,6 @@ export default defineConfig({
         port: 3000,
         reuseExistingServer: !process.env.CI,
         timeout: 120_000,
-        env: {
-          NEXT_PUBLIC_SUPABASE_URL: process.env.NEXT_PUBLIC_SUPABASE_URL || 'https://example.supabase.co',
-          NEXT_PUBLIC_SUPABASE_ANON_KEY: process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || 'test_anon_key',
-          NEXT_PUBLIC_APP_URL: process.env.NEXT_PUBLIC_APP_URL || 'http://localhost:3000',
-        },
       },
 });
 
