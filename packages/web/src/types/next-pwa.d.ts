@@ -7,14 +7,27 @@ declare module "next-pwa" {
     register?: boolean;
     scope?: string;
     sw?: string;
-    runtimeCaching?: any[];
-    buildExcludes?: any[];
-    fallbacks?: any;
+    runtimeCaching?: Array<{
+      urlPattern: RegExp | string;
+      handler: string;
+      options?: {
+        cacheName?: string;
+        expiration?: {
+          maxEntries?: number;
+          maxAgeSeconds?: number;
+        };
+        cacheableResponse?: {
+          statuses: number[];
+        };
+      };
+    }>;
+    buildExcludes?: Array<string | RegExp>;
+    fallbacks?: Record<string, string>;
     skipWaiting?: boolean;
     dynamicStartUrl?: boolean;
     reloadOnOnline?: boolean;
     swcMinify?: boolean;
-    workboxOptions?: any;
+    workboxOptions?: Record<string, unknown>;
   }
 
   function withPWA(config?: PWAConfig): (config: NextConfig) => NextConfig;
