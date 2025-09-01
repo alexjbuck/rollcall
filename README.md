@@ -2,13 +2,40 @@
 
 ## Overview
 
-Rollcall is an application for managing centrally scheduled events and user attendance to those events. One of the key features is that users can partially attend scheduled events. They do this by marking the days that they can attend. Furthermore, users can mark additional days for attendance that can be queried by admins. 
+Rollcall is a SaaS for managing centrally scheduled events and user attendance to those events. One of the key features is that users can partially attend scheduled events. They do this by marking the days that they can attend. Furthermore, users can mark additional days for attendance that can be queried by admins. 
 
 The overall goals are the following:
 
 1. Reliably get attendance input from all users for all centrally scheduled events.
 2. Provide quick visibility to admins as to which users will be in attendance on any given day.
 3. Provide users a way to signal extra attendance to admins.
+
+This is a multi-tenant SaaS and users can belong to multiple tenants. When a new user logs in by default they should create their own tenant. Once invited to a tenant they can then select it and interact with it.
+
+Centrally managed events have:
+
+- a start and end date
+- a location
+- a name
+- a description
+
+Admins create centrally managed events.
+
+Users see a list of the centrally managed events, in either a table view or in a calendar view. They can mark days they'll be attending. They can provide comments on a given day that admins can view. Users must positively mark attending or not attending for centrally managed events.
+
+Users can add additional days with comments.
+
+Admins can query attendance for centrally managed event periods to see users who has not responded and who has responded yes/no. Admins must have a confident view of who can attend.
+
+Admins can also query attendance for any date range to see any additional attendance that users have added. The default view for this is the attendance for the next two week period as well as the next centrally managed event.
+
+Furthermore, admins can configure events to have notifications that go out to all users if they have not responded either yes/no to an upcoming centrally managed event. The lead time on these notifications is configurable per event but has a default value that admins can set. The _global_ default value is 14 days.
+
+## Motivation
+
+The motivation for this application is from my experience managing operations for a US Navy Reserve aviation squadron. The centrally managed events in this case are drill periods, and its very difficult to know who is attending or not. Often times this information is not readily available to reservists who do not have access to Navy information systems on a regular basis, unlike the operations staff permanently at the squadron.
+
+This is being constructed as a Progressive Web App to enable "installing" onto reservists phones to make access a breeze.
 
 ## Login 
 
