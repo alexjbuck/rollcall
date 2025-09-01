@@ -10,8 +10,6 @@ tasks:
     command: 'yarn dlx supabase stop'
   dev:
     command: 'yarn dlx supabase start'
-    deps:
-      - stop
 
   migration-new:
     command: 'yarn dlx supabase migration new'
