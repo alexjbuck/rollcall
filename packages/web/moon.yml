@@ -1,3 +1,10 @@
+language: "typescript"
+layer: "application"
+stack: "frontend"
+project:
+  name: "@rollcall/web"
+  description: "Rollcall web application"
+tags: ["nextjs", "tailwind"]
 tasks:
   dev:
     command: 'next dev --turbopack'
@@ -14,7 +21,3 @@ tasks:
     command: 'yarn build'
   start:
     command: 'yarn start'
-  lint:
-    command: 'yarn lint'
-  format:
-    command: 'yarn format'

@@ -1,3 +1,10 @@
+language: "bash"
+layer: "application"
+stack: "backend"
+project:
+  name: "@rollcall/db"
+  description: "Rollcall database"
+tags: ["database", "supabase"]
 tasks:
   stop:
     command: 'yarn dlx supabase stop'
@@ -5,3 +12,16 @@ tasks:
     command: 'yarn dlx supabase start'
     deps:
       - stop
+
+  migration-new:
+    command: 'yarn dlx supabase migration new'
+    options:
+      interactive: true
+      cache: false
+      runInCI: false
+    
+  migration-up:
+    command: 'yarn dlx supabase migration up'
+    inputs:
+      - 'supabase/migrations/**/*'
+    

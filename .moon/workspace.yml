@@ -3,10 +3,17 @@ $schema: './cache/schemas/workspace.json'
 
 # extends: './shared/workspace.yml'
 
-vcs:
-  manager: 'git'
-  defaultBranch: 'main'
-
 projects:
   - 'apps/*'
   - 'packages/*'
+
+vcs:
+  manager: 'git'
+  defaultBranch: 'main'
+  syncHooks: true
+  hooks:
+    pre-push:
+      - 'moon run :lint :format --affected --status=staged'
+
+notifier:
+  terminalNotifications: 'always'
