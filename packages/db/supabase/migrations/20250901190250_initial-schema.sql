@@ -66,6 +66,21 @@ create table if not exists public.invitations (
   created_at timestamptz default now()
 );
 
+-- Helper: check if current user is admin of given organization
+create or replace function public.is_org_admin(org_id uuid)
+returns boolean
+language sql
+stable
+as $$
+  select exists (
+    select 1
+    from public.profiles p
+    where p.id = auth.uid()
+      and p.organization_id = org_id
+      and p.role = 'admin'
+  );
+$$;
+
 -- Indexes for performance
 create index if not exists idx_user_availability_date on public.user_availability(available_date);
 create index if not exists idx_user_availability_user_date on public.user_availability(user_id, available_date);
@@ -85,20 +100,6 @@ returns table (
   attendance_dates date[],
   meets_requirement boolean
 )
--- Helper: check if current user is admin of given organization
-create or replace function public.is_org_admin(org_id uuid)
-returns boolean
-language sql
-stable
-as $$
-  select exists (
-    select 1
-    from public.profiles p
-    where p.id = auth.uid()
-      and p.organization_id = org_id
-      and p.role = 'admin'
-  );
-$$;
 language plpgsql
 as $$
 begin
