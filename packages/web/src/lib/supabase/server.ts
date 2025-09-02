@@ -1,4 +1,5 @@
 import { createServerClient } from "@supabase/ssr";
+import type { SerializeOptions } from "cookie";
 import { cookies } from "next/headers";
 
 export const createSupabaseServerClient = async () => {
@@ -11,14 +12,22 @@ export const createSupabaseServerClient = async () => {
 
   return createServerClient(supabaseUrl, supabaseAnonKey, {
     cookies: {
-      get(name: string) {
-        return cookieStore.get(name)?.value;
+      getAll() {
+        return cookieStore.getAll().map((cookie) => ({
+          name: cookie.name,
+          value: cookie.value,
+        }));
       },
-      set(name: string, value: string, options: Parameters<typeof cookieStore.set>[0]) {
-        cookieStore.set({ name, value, ...options });
-      },
-      remove(name: string, options: Parameters<typeof cookieStore.set>[0]) {
-        cookieStore.set({ name, value: "", ...options, maxAge: 0 });
+      setAll(
+        cookies: Array<{
+          name: string;
+          value: string;
+          options: Partial<SerializeOptions>;
+        }>,
+      ) {
+        cookies.forEach(({ name, value, options }) => {
+          cookieStore.set({ name, value, ...options });
+        });
       },
     },
   });
