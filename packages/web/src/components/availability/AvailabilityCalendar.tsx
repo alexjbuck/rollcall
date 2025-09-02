@@ -52,17 +52,19 @@ export function AvailabilityCalendar() {
 
   const toggleMutation = useMutation({
     mutationFn: async (isoDate: string) => {
+      const { data: userRes } = await supabase.auth.getUser();
+      if (!userRes.user) throw new Error("Not authenticated");
+
       const isSelected = availableSet.has(isoDate);
       if (isSelected) {
         const { error } = await supabase
           .from("user_availability")
           .delete()
+          .eq("user_id", userRes.user.id)
           .eq("available_date", isoDate);
         if (error) throw error;
         return { isoDate, selected: false } as const;
       }
-      const { data: userRes } = await supabase.auth.getUser();
-      if (!userRes.user) throw new Error("Not authenticated");
       const { data: profile, error: pErr } = await supabase
         .from("profiles")
         .select("organization_id")
