@@ -5,20 +5,7 @@
 -- Extensions
 create extension if not exists pgcrypto;
 
--- Helper: check if current user is admin of given organization
-create or replace function public.is_org_admin(org_id uuid)
-returns boolean
-language sql
-stable
-as $$
-  select exists (
-    select 1
-    from public.profiles p
-    where p.id = auth.uid()
-      and p.organization_id = org_id
-      and p.role = 'admin'
-  );
-$$;
+-- Helper will be defined after dependent tables are created
 
 -- Organizations (multi-tenant support)
 create table if not exists public.organizations (
@@ -98,6 +85,20 @@ returns table (
   attendance_dates date[],
   meets_requirement boolean
 )
+-- Helper: check if current user is admin of given organization
+create or replace function public.is_org_admin(org_id uuid)
+returns boolean
+language sql
+stable
+as $$
+  select exists (
+    select 1
+    from public.profiles p
+    where p.id = auth.uid()
+      and p.organization_id = org_id
+      and p.role = 'admin'
+  );
+$$;
 language plpgsql
 as $$
 begin

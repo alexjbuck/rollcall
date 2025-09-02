@@ -17,6 +17,7 @@ tasks:
     command: 'yarn supabase start'
     deps:
       - 'stop'
+      - 'migration-up'
     options:
       envFile:
         - '.env'
