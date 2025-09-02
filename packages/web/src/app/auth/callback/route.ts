@@ -1,5 +1,4 @@
 import { createServerClient } from "@supabase/ssr";
-import type { SerializeOptions } from "cookie";
 import { cookies } from "next/headers";
 import { type NextRequest, NextResponse } from "next/server";
 
@@ -10,22 +9,14 @@ export async function GET(req: NextRequest) {
     process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY as string,
     {
       cookies: {
-        getAll() {
-          return cookieStore.getAll().map((cookie) => ({
-            name: cookie.name,
-            value: cookie.value,
-          }));
+        get(name: string) {
+          return cookieStore.get(name)?.value;
         },
-        setAll(
-          cookies: Array<{
-            name: string;
-            value: string;
-            options: Partial<SerializeOptions>;
-          }>,
-        ) {
-          cookies.forEach(({ name, value, options }) => {
-            cookieStore.set({ name, value, ...options });
-          });
+        set(name: string, value: string, options: Parameters<typeof cookieStore.set>[0]) {
+          cookieStore.set({ name, value, ...options });
+        },
+        remove(name: string, options: Parameters<typeof cookieStore.set>[0]) {
+          cookieStore.set({ name, value: "", ...options, maxAge: 0 });
         },
       },
     },
