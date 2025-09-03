@@ -1,8 +1,8 @@
 "use client";
 
 import { useCallback, useState } from "react";
-import { createClient } from "@/lib/supabase/client";
 import { getEnv } from "@/env/client";
+import { createClient } from "@/lib/supabase/client";
 
 export default function SignInPage() {
   const [loading, setLoading] = useState(false);
@@ -13,7 +13,7 @@ export default function SignInPage() {
     setError(null);
     try {
       const supabase = createClient();
-      const redirectTo = `${env.NEXT_PUBLIC_APP_URL!}/auth/callback`;
+      const redirectTo = `${env.NEXT_PUBLIC_APP_URL}/auth/callback`;
       const { error: signInError } = await supabase.auth.signInWithOAuth({
         provider: "google",
         options: { redirectTo },
@@ -25,7 +25,7 @@ export default function SignInPage() {
     } finally {
       setLoading(false);
     }
-  }, []);
+  }, [env.NEXT_PUBLIC_APP_URL]);
 
   return (
     <div className="min-h-screen flex items-center justify-center p-6">

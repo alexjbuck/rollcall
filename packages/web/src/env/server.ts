@@ -1,5 +1,5 @@
 // src/env/server.ts
-import { z } from 'zod';
+import { z } from "zod";
 
 const envSchema = z.object({
   NEXT_PUBLIC_APP_URL: z.url(),
@@ -11,8 +11,11 @@ const envSchema = z.object({
 export const getEnv = () => {
   const parsedEnv = envSchema.safeParse(process.env);
   if (!parsedEnv.success) {
-    console.error('❌ Invalid environment variables', z.treeifyError(parsedEnv.error));
-    throw new Error('Invalid environment variables');
+    console.error(
+      "❌ Invalid environment variables",
+      z.treeifyError(parsedEnv.error),
+    );
+    throw new Error("Invalid environment variables");
   }
   return parsedEnv.data;
-}
+};
