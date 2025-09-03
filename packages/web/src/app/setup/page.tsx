@@ -2,11 +2,11 @@
 
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
-import { createSupabaseBrowserClient } from "@/lib/supabase/client";
+import { createClient } from "@/lib/supabase/client";
 
 export default function SetupPage() {
   const router = useRouter();
-  const supabase = createSupabaseBrowserClient();
+  const supabase = createClient();
   const [orgName, setOrgName] = useState("");
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);

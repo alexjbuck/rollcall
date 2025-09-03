@@ -1,0 +1,13 @@
+{
+    "tasks": [
+        {
+            "label": "moon dev",
+            "command": "source ~/.zshrc && moon :dev",
+            "type": "shell",
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+        }
+    ]
+}

@@ -2,7 +2,7 @@
 
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { useMemo, useState } from "react";
-import { createSupabaseBrowserClient } from "@/lib/supabase/client";
+import { createClient } from "@/lib/supabase/client";
 
 type AvailabilityRow = {
   id: string;
@@ -17,7 +17,7 @@ function endOfMonth(date: Date) {
 }
 
 export function AvailabilityCalendar() {
-  const supabase = createSupabaseBrowserClient();
+  const supabase = createClient();
   const qc = useQueryClient();
 
   const [cursor, setCursor] = useState(() => new Date());

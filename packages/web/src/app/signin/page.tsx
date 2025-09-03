@@ -1,18 +1,19 @@
 "use client";
 
 import { useCallback, useState } from "react";
-import { createSupabaseBrowserClient } from "@/lib/supabase/client";
+import { createClient } from "@/lib/supabase/client";
+import { getEnv } from "@/env/client";
 
 export default function SignInPage() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
-
+  const env = getEnv();
   const signInWithGoogle = useCallback(async () => {
     setLoading(true);
     setError(null);
     try {
-      const supabase = createSupabaseBrowserClient();
-      const redirectTo = `${process.env.NEXT_PUBLIC_APP_URL}/auth/callback`;
+      const supabase = createClient();
+      const redirectTo = `${env.NEXT_PUBLIC_APP_URL!}/auth/callback`;
       const { error: signInError } = await supabase.auth.signInWithOAuth({
         provider: "google",
         options: { redirectTo },

@@ -1,9 +1,9 @@
 import { redirect } from "next/navigation";
 import { AvailabilityCalendar } from "@/components/availability/AvailabilityCalendar";
-import { createSupabaseServerClient } from "@/lib/supabase/server";
+import { createClient } from "@/lib/supabase/server";
 
 export default async function DashboardPage() {
-  const supabase = await createSupabaseServerClient();
+  const supabase = await createClient();
   const {
     data: { user },
   } = await supabase.auth.getUser();

@@ -1,7 +1,7 @@
 "use server";
 
 import { revalidatePath } from "next/cache";
-import { createSupabaseServerClient } from "@/lib/supabase/server";
+import { createClient } from "@/lib/supabase/server";
 
 export type CreateDrillState = {
   error?: string | null;
@@ -13,7 +13,7 @@ export async function createDrill(
   formData: FormData,
 ): Promise<CreateDrillState> {
   try {
-    const supabase = await createSupabaseServerClient();
+    const supabase = await createClient();
 
     const {
       data: { user },
