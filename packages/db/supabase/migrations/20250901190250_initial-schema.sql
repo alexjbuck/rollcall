@@ -5,20 +5,7 @@
 -- Extensions
 create extension if not exists pgcrypto;
 
--- Helper: check if current user is admin of given organization
-create or replace function public.is_org_admin(org_id uuid)
-returns boolean
-language sql
-stable
-as $$
-  select exists (
-    select 1
-    from public.profiles p
-    where p.id = auth.uid()
-      and p.organization_id = org_id
-      and p.role = 'admin'
-  );
-$$;
+-- Helper will be defined after dependent tables are created
 
 -- Organizations (multi-tenant support)
 create table if not exists public.organizations (
@@ -78,6 +65,21 @@ create table if not exists public.invitations (
   expires_at timestamptz default (now() + interval '7 days'),
   created_at timestamptz default now()
 );
+
+-- Helper: check if current user is admin of given organization
+create or replace function public.is_org_admin(org_id uuid)
+returns boolean
+language sql
+stable
+as $$
+  select exists (
+    select 1
+    from public.profiles p
+    where p.id = auth.uid()
+      and p.organization_id = org_id
+      and p.role = 'admin'
+  );
+$$;
 
 -- Indexes for performance
 create index if not exists idx_user_availability_date on public.user_availability(available_date);

@@ -21,3 +21,31 @@ tasks:
     command: 'yarn build'
   start:
     command: 'yarn start'
+
+  test:
+    command: 'noop'
+    deps:
+      - 'test-playwright'
+
+  test-playwright:
+    command: 'yarn playwright test'
+    deps:
+      - 'test-playwright-install'
+    env:
+      NEXT_PUBLIC_APP_URL: 'http://localhost:3000'
+      NEXT_PUBLIC_SUPABASE_URL: 'http://localhost:54321'
+      NEXT_PUBLIC_SUPABASE_ANON_KEY: 'anon'
+    inputs:
+      - 'tests/**/*'
+      - 'playwright.config.ts'
+      - 'package.json'
+      - 'tsconfig.json'
+    outputs:
+      - 'test-results'
+    
+  test-playwright-install:
+    command: 'yarn playwright install --with-deps'
+    inputs:
+      - 'playwright.config.ts'
+      - 'package.json'
+      - 'tsconfig.json'
